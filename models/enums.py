@@ -10,6 +10,6 @@ class userRole(Enum):
 
 class sellState(Enum):
     complate = "complate"
-    reject = "reject"
+    rejected = "rejected"
+    listed = "listed"
     in_progress = "in progress"
-    approved = "approved"

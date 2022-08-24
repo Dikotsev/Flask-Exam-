@@ -27,7 +27,7 @@ class DevelopmentConfig:
         f"@localhost:{config('DB_PORT')}/{config('DB_NAME')}"
     )
 
-
+'''
 class TestConfig:
     FLASK_ENV = "test"
     DEBUG = True
@@ -36,14 +36,18 @@ class TestConfig:
         f"postgresql://{config('TEST_DB_USER')}:{config('TEST_DB_PASSWORD')}"
         f"@localhost:{config('TEST_DB_PORT')}/{config('TEST_DB_NAME')}"
     )
-
+'''
 
 def create_app(config="config.DevelopmentConfig"):
     app = Flask(__name__)
     db.init_app(app)
-    app.config.from_object(config)
     migrate = Migrate(app, db)
+    app.config.from_object(config)
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     CORS(app)
     api = Api(app)
     [api.add_resource(*route_data) for route_data in routes]
     return app
+
+
+
